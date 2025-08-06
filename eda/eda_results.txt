@@ -1,0 +1,507 @@
+================================================================================
+ОСНОВНАЯ ИНФОРМАЦИЯ О ДАТАСЕТАХ
+================================================================================
+
+ДАТАСЕТ ТРАНЗАКЦИЙ:
+----------------------------------------
+Размер датасета: 7483766 строк, 23 столбцов
+Память, занимаемая датасетом: 7479.57 MB
+
+Типы данных:
+transaction_id                     object
+customer_id                        object
+card_number                         int64
+timestamp                  datetime64[us]
+vendor_category                    object
+vendor_type                        object
+vendor                             object
+amount                            float64
+currency                           object
+country                            object
+city                               object
+city_size                          object
+card_type                          object
+is_card_present                      bool
+device                             object
+channel                            object
+device_fingerprint                 object
+ip_address                         object
+is_outside_home_country              bool
+is_high_risk_vendor                  bool
+is_weekend                           bool
+last_hour_activity                 object
+is_fraud                             bool
+dtype: object
+
+Первые 5 строк:
+  transaction_id customer_id  ...                                 last_hour_activity is_fraud
+0    TX_a0ad2a2a  CUST_72886  ...  {'num_transactions': 1197, 'total_amount': 334...    False
+1    TX_3599c101  CUST_70474  ...  {'num_transactions': 509, 'total_amount': 2011...     True
+2    TX_a9461c6d  CUST_10715  ...  {'num_transactions': 332, 'total_amount': 3916...    False
+3    TX_7be21fc4  CUST_16193  ...  {'num_transactions': 764, 'total_amount': 2201...    False
+4    TX_150f490b  CUST_87572  ...  {'num_transactions': 218, 'total_amount': 4827...     True
+
+[5 rows x 23 columns]
+
+Последние 5 строк:
+        transaction_id customer_id  ...                                 last_hour_activity is_fraud
+7483761    TX_58a762fa  CUST_11344  ...  {'num_transactions': 1, 'total_amount': 1521.7...    False
+7483762    TX_dabcf671  CUST_38961  ...  {'num_transactions': 0, 'total_amount': 356.06...    False
+7483763    TX_ab567eb4  CUST_75576  ...  {'num_transactions': 0, 'total_amount': 391.96...    False
+7483764    TX_5ae61846  CUST_82508  ...  {'num_transactions': 2, 'total_amount': 1474.5...    False
+7483765    TX_54fccca9  CUST_20139  ...  {'num_transactions': 0, 'total_amount': 40668....    False
+
+[5 rows x 23 columns]
+
+ДАТАСЕТ КУРСОВ ВАЛЮТ:
+----------------------------------------
+Размер датасета: 31 строк, 12 столбцов
+Период: с 2024-09-30 по 2024-10-30
+Доступные валюты: AUD, BRL, CAD, EUR, GBP, JPY, MXN, NGN, RUB, SGD, USD
+
+ВАЖНО: Все суммы транзакций конвертированы в доллары США (USD)
+используя исторические курсы валют на дату транзакции.
+
+Первые 5 строк курсов валют:
+         date       AUD       BRL       CAD       EUR  ...        MXN          NGN        RUB       SGD  USD
+0  2024-09-30  1.443654  5.434649  1.351196  0.895591  ...  19.694724  1668.736400  94.133735  1.280156    1
+1  2024-10-01  1.442917  5.444170  1.352168  0.897557  ...  19.667561  1670.694524  92.898519  1.284352    1
+2  2024-10-02  1.449505  5.425444  1.348063  0.903056  ...  19.606748  1669.653006  94.583198  1.286983    1
+3  2024-10-03  1.456279  5.442044  1.351451  0.906018  ...  19.457701  1670.097873  95.655442  1.294391    1
+4  2024-10-04  1.460930  5.477788  1.355260  0.906452  ...  19.363467  1649.763738  94.755337  1.296800    1
+
+[5 rows x 12 columns]
+
+АНАЛИЗ ПРОПУЩЕННЫХ ЗНАЧЕНИЙ
+==================================================
+                         Количество пропусков  Процент пропусков
+transaction_id                              0                0.0
+customer_id                                 0                0.0
+card_number                                 0                0.0
+timestamp                                   0                0.0
+vendor_category                             0                0.0
+vendor_type                                 0                0.0
+vendor                                      0                0.0
+amount                                      0                0.0
+currency                                    0                0.0
+country                                     0                0.0
+city                                        0                0.0
+city_size                                   0                0.0
+card_type                                   0                0.0
+is_card_present                             0                0.0
+device                                      0                0.0
+channel                                     0                0.0
+device_fingerprint                          0                0.0
+ip_address                                  0                0.0
+is_outside_home_country                     0                0.0
+is_high_risk_vendor                         0                0.0
+is_weekend                                  0                0.0
+last_hour_activity                          0                0.0
+is_fraud                                    0                0.0
+
+АНАЛИЗ МОШЕННИЧЕСКИХ ТРАНЗАКЦИЙ
+==================================================
+Общее количество транзакций: 7,483,766
+Легитимные транзакции: 5,989,047 (80.03%)
+Мошеннические транзакции: 1,494,719 (19.97%)
+
+ВРЕМЕННОЙ АНАЛИЗ ТРАНЗАКЦИЙ
+==================================================
+Распределение мошенничества по дням недели:
+is_fraud         False      True 
+day_of_week                      
+Friday       80.041320  19.958680
+Monday       80.022655  19.977345
+Saturday     80.053769  19.946231
+Sunday       79.997208  20.002792
+Thursday     80.030434  19.969566
+Tuesday      80.025032  19.974968
+Wednesday    80.022751  19.977249
+
+Распределение мошенничества по часам:
+is_fraud      False      True 
+hour                          
+0         73.344076  26.655924
+1         40.743425  59.256575
+2         40.805143  59.194857
+3         40.856191  59.143809
+4         40.874564  59.125436
+5         79.940919  20.059081
+6         78.858667  21.141333
+7         86.281111  13.718889
+8         89.755300  10.244700
+9         88.219072  11.780928
+10        86.220368  13.779632
+11        88.125640  11.874360
+12        89.698278  10.301722
+13        88.135502  11.864498
+14        86.118700  13.881300
+15        86.123958  13.876042
+16        88.249300  11.750700
+17        89.763429  10.236571
+18        90.928871   9.071129
+19        89.677958  10.322042
+20        86.308637  13.691363
+21        79.116938  20.883062
+22        87.556801  12.443199
+23        85.284795  14.715205
+
+АНАЛИЗ СУММ ТРАНЗАКЦИЙ (В ДОЛЛАРАХ США)
+==================================================
+Статистики по суммам транзакций:
+              count        mean          std       min         25%         50%          75%           max
+is_fraud                                                                                                 
+False     5989047.0  459.782611   417.007733  6.232713  192.300566  354.535911   528.764025   3170.582484
+True      1494719.0  874.606750  1349.882692  0.002406    3.533985  443.217866  1292.990359  15781.540993
+
+Распределение мошенничества по валютам:
+is_fraud      False      True 
+currency                      
+AUD       92.419493   7.580507
+BRL       62.894011  37.105989
+CAD       93.001172   6.998828
+EUR       92.997332   7.002668
+GBP       93.064905   6.935095
+JPY       92.872109   7.127891
+MXN       61.965193  38.034807
+NGN       64.863974  35.136026
+RUB       62.276215  37.723785
+SGD       93.644295   6.355705
+USD       92.538495   7.461505
+
+АНАЛИЗ КАТЕГОРИАЛЬНЫХ ПЕРЕМЕННЫХ
+==================================================
+
+VENDOR_CATEGORY:
+------------------------------
+Распределение значений:
+vendor_category
+Healthcare       936770
+Restaurant       936178
+Entertainment    936173
+Retail           935883
+Travel           935790
+Gas              935401
+Grocery          934029
+Education        933542
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud             False      True 
+vendor_category                      
+Education        80.054138  19.945862
+Entertainment    80.036809  19.963191
+Gas              80.026855  19.973145
+Grocery          79.980600  20.019400
+Healthcare       80.062449  19.937551
+Restaurant       80.030400  19.969600
+Retail           80.060221  19.939779
+Travel           79.965911  20.034089
+
+
+VENDOR_TYPE:
+------------------------------
+Распределение значений:
+vendor_type
+online       1401650
+physical      935039
+medical       468393
+pharmacy      468377
+local         467902
+major         467499
+supplies      466765
+fast_food     312805
+events        312598
+streaming     312091
+premium       311695
+casual        311678
+gaming        311484
+hotels        234311
+booking       234026
+transport     233977
+airlines      233476
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud         False      True 
+vendor_type                      
+airlines     79.946547  20.053453
+booking      79.982566  20.017434
+casual       80.081366  19.918634
+events       79.998273  20.001727
+fast_food    79.928070  20.071930
+gaming       80.044240  19.955760
+hotels       80.051299  19.948701
+local        80.035777  19.964223
+major        80.017925  19.982075
+medical      80.102179  19.897821
+online       80.068990  19.931010
+pharmacy     80.022717  19.977283
+physical     79.979445  20.020555
+premium      80.082132  19.917868
+streaming    80.067993  19.932007
+supplies     80.024209  19.975791
+transport    79.883065  20.116935
+
+
+CARD_TYPE:
+------------------------------
+Распределение значений:
+card_type
+Basic Debit        1548363
+Premium Debit      1539661
+Platinum Credit    1533013
+Gold Credit        1447260
+Basic Credit       1415469
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud             False      True 
+card_type                            
+Basic Credit     80.025843  19.974157
+Basic Debit      80.028004  19.971996
+Gold Credit      80.027086  19.972914
+Platinum Credit  80.026914  19.973086
+Premium Debit    80.027941  19.972059
+
+
+CHANNEL:
+------------------------------
+Распределение значений:
+channel
+web       4563141
+mobile    2269578
+pos        651047
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud      False       True 
+channel                        
+mobile    87.612235   12.387765
+pos        0.000000  100.000000
+web       87.672483   12.327517
+
+
+CITY_SIZE:
+------------------------------
+Распределение значений:
+city_size
+medium    7284598
+large      199168
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud       False      True 
+city_size                      
+large      92.541473   7.458527
+medium     79.685029  20.314971
+
+
+IS_CARD_PRESENT:
+------------------------------
+Распределение значений:
+is_card_present
+False    6832719
+True      651047
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud            False      True 
+is_card_present                     
+False            87.65247   12.34753
+True              0.00000  100.00000
+
+
+IS_OUTSIDE_HOME_COUNTRY:
+------------------------------
+Распределение значений:
+is_outside_home_country
+False    5073605
+True     2410161
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud                     False      True 
+is_outside_home_country                      
+False                    97.509798   2.490202
+True                     43.224706  56.775294
+
+
+IS_HIGH_RISK_VENDOR:
+------------------------------
+Распределение значений:
+is_high_risk_vendor
+False    5611803
+True     1871963
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud                 False      True 
+is_high_risk_vendor                      
+False                80.035792  19.964208
+True                 80.001368  19.998632
+
+
+IS_WEEKEND:
+------------------------------
+Распределение значений:
+is_weekend
+False    5554103
+True     1929663
+Name: count, dtype: int64
+
+Процент мошенничества по категориям:
+is_fraud        False      True 
+is_weekend                      
+False       80.027792  19.972208
+True        80.025424  19.974576
+
+ГЕОГРАФИЧЕСКИЙ АНАЛИЗ
+==================================================
+Топ-10 стран по проценту мошенничества:
+country
+Mexico       38.034807
+Russia       37.723785
+Brazil       37.105989
+Nigeria      35.136026
+Australia     7.580507
+USA           7.461505
+Japan         7.127891
+Germany       7.093909
+Canada        6.998828
+UK            6.935095
+Name: True, dtype: float64
+
+Топ-10 стран по количеству транзакций:
+country
+Nigeria      849840
+Brazil       804800
+Russia       793730
+Mexico       785704
+Singapore    588668
+France       541287
+UK           538493
+Canada       532632
+Japan        527393
+Germany      524464
+dtype: int64
+
+Топ-10 городов по проценту мошенничества:
+city
+Unknown City    20.868676
+Los Angeles      7.619105
+San Jose         7.551734
+Phoenix          7.521904
+Philadelphia     7.490884
+San Diego        7.478433
+San Antonio      7.460213
+New York         7.420942
+Chicago          7.415050
+Houston          7.380347
+Name: True, dtype: float64
+
+АНАЛИЗ АКТИВНОСТИ ЗА ПОСЛЕДНИЙ ЧАС
+==================================================
+
+NUM_TRANSACTIONS:
+------------------------------
+              count        mean         std  min    25%    50%    75%     max
+is_fraud                                                                     
+False     5989047.0  408.262533  390.672430  0.0  105.0  292.0  605.0  3962.0
+True      1494719.0  412.670479  392.771128  0.0  108.0  296.0  611.0  3854.0
+
+
+TOTAL_AMOUNT:
+------------------------------
+              count          mean           std  ...           50%           75%           max
+is_fraud                                         ...                                          
+False     5989047.0  1.985784e+07  3.560844e+07  ...  1.012947e+07  2.267859e+07  1.072915e+09
+True      1494719.0  2.015500e+07  3.585936e+07  ...  1.037572e+07  2.296117e+07  1.038709e+09
+
+[2 rows x 8 columns]
+
+
+UNIQUE_MERCHANTS:
+------------------------------
+              count       mean        std  min   25%   50%    75%    max
+is_fraud                                                                
+False     5989047.0  79.916723  30.571651  0.0  63.0  95.0  104.0  105.0
+True      1494719.0  80.445120  30.070122  0.0  64.0  95.0  104.0  105.0
+
+
+UNIQUE_COUNTRIES:
+------------------------------
+              count       mean       std  min   25%   50%   75%   max
+is_fraud                                                             
+False     5989047.0  10.650769  2.635341  0.0  11.0  12.0  12.0  12.0
+True      1494719.0  10.710001  2.545636  0.0  11.0  12.0  12.0  12.0
+
+
+MAX_SINGLE_AMOUNT:
+------------------------------
+              count          mean           std  ...           50%           75%           max
+is_fraud                                         ...                                          
+False     5989047.0  1.719987e+06  1.399345e+06  ...  1.229527e+06  2.287102e+06  6.253153e+06
+True      1494719.0  1.752255e+06  1.393929e+06  ...  1.267038e+06  2.333986e+06  6.253153e+06
+
+[2 rows x 8 columns]
+
+АНАЛИЗ КОРРЕЛЯЦИЙ
+==================================================
+Корреляционная матрица:
+                              card_number    amount  ...  is_weekend      is_fraud
+card_number                  1.000000e+00 -0.003743  ...    0.000334 -8.502612e-07
+amount                      -3.742728e-03  1.000000  ...    0.000068  2.276748e-01
+hour                        -5.379684e-05 -0.063398  ...   -0.000402 -2.796239e-01
+last_hour_num_transactions   4.958537e-03  0.004461  ...   -0.039360  4.505997e-03
+last_hour_total_amount       1.148142e-03 -0.003515  ...   -0.020814  3.331642e-03
+last_hour_unique_merchants   2.050812e-03  0.005222  ...    0.019169  6.932437e-03
+last_hour_unique_countries   2.198329e-03  0.006454  ...    0.046185  9.046147e-03
+last_hour_max_single_amount -2.166281e-03  0.056458  ...   -0.005921  9.225981e-03
+is_card_present              3.138063e-04  0.140454  ...   -0.000160  6.178862e-01
+is_outside_home_country     -1.949185e-03  0.147149  ...    0.000015  6.344586e-01
+is_high_risk_vendor          5.007948e-04  0.121204  ...    0.000116  3.729181e-04
+is_weekend                   3.343667e-04  0.000068  ...    1.000000  2.590952e-05
+is_fraud                    -8.502612e-07  0.227675  ...    0.000026  1.000000e+00
+
+[13 rows x 13 columns]
+
+Корреляции с целевой переменной (is_fraud):
+is_fraud                       1.000000e+00
+is_outside_home_country        6.344586e-01
+is_card_present                6.178862e-01
+amount                         2.276748e-01
+last_hour_max_single_amount    9.225981e-03
+last_hour_unique_countries     9.046147e-03
+last_hour_unique_merchants     6.932437e-03
+last_hour_num_transactions     4.505997e-03
+last_hour_total_amount         3.331642e-03
+is_high_risk_vendor            3.729181e-04
+is_weekend                     2.590952e-05
+card_number                   -8.502612e-07
+hour                          -2.796239e-01
+Name: is_fraud, dtype: float64
+
+СВОДНАЯ СТАТИСТИКА
+==================================================
+Общая статистика:
+Общее количество транзакций: 7,483,766
+Количество уникальных клиентов: 4,869
+Количество уникальных карт: 5,000
+Количество уникальных вендоров: 105
+Количество стран: 12
+Количество городов: 11
+Количество валют: 11
+
+Статистика по суммам:
+Минимальная сумма: 0.00
+Максимальная сумма: 15781.54
+Средняя сумма: 542.63
+Медианная сумма: 359.26
+Стандартное отклонение: 728.43
+
+Временной период:
+Начало периода: 2024-09-30 00:00:01.034820
+Конец периода: 2024-10-30 23:59:59.101885
+Продолжительность: 30 days 23:59:58.067065
+
