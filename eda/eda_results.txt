@@ -5,7 +5,7 @@
 ДАТАСЕТ ТРАНЗАКЦИЙ:
 ----------------------------------------
 Размер датасета: 7483766 строк, 23 столбцов
-Память, занимаемая датасетом: 7479.57 MB
+Память, занимаемая датасетом в ОЗУ: 7479.57 MB
 
 Типы данных:
 transaction_id                     object
@@ -34,22 +34,22 @@ is_fraud                             bool
 dtype: object
 
 Первые 5 строк:
-  transaction_id customer_id  ...                                 last_hour_activity is_fraud
-0    TX_a0ad2a2a  CUST_72886  ...  {'num_transactions': 1197, 'total_amount': 334...    False
-1    TX_3599c101  CUST_70474  ...  {'num_transactions': 509, 'total_amount': 2011...     True
-2    TX_a9461c6d  CUST_10715  ...  {'num_transactions': 332, 'total_amount': 3916...    False
-3    TX_7be21fc4  CUST_16193  ...  {'num_transactions': 764, 'total_amount': 2201...    False
-4    TX_150f490b  CUST_87572  ...  {'num_transactions': 218, 'total_amount': 4827...     True
+  transaction_id customer_id       card_number                  timestamp vendor_category  ... is_outside_home_country is_high_risk_vendor  is_weekend                                 last_hour_activity is_fraud
+0    TX_a0ad2a2a  CUST_72886  6646734767813109 2024-09-30 00:00:01.034820      Restaurant  ...                   False               False       False  {'num_transactions': 1197, 'total_amount': 334...    False
+1    TX_3599c101  CUST_70474   376800864692727 2024-09-30 00:00:01.764464   Entertainment  ...                    True                True       False  {'num_transactions': 509, 'total_amount': 2011...     True
+2    TX_a9461c6d  CUST_10715  5251909460951913 2024-09-30 00:00:02.273762         Grocery  ...                   False               False       False  {'num_transactions': 332, 'total_amount': 3916...    False
+3    TX_7be21fc4  CUST_16193   376079286931183 2024-09-30 00:00:02.297466             Gas  ...                   False               False       False  {'num_transactions': 764, 'total_amount': 2201...    False
+4    TX_150f490b  CUST_87572  6172948052178810 2024-09-30 00:00:02.544063      Healthcare  ...                    True               False       False  {'num_transactions': 218, 'total_amount': 4827...     True
 
 [5 rows x 23 columns]
 
 Последние 5 строк:
-        transaction_id customer_id  ...                                 last_hour_activity is_fraud
-7483761    TX_58a762fa  CUST_11344  ...  {'num_transactions': 1, 'total_amount': 1521.7...    False
-7483762    TX_dabcf671  CUST_38961  ...  {'num_transactions': 0, 'total_amount': 356.06...    False
-7483763    TX_ab567eb4  CUST_75576  ...  {'num_transactions': 0, 'total_amount': 391.96...    False
-7483764    TX_5ae61846  CUST_82508  ...  {'num_transactions': 2, 'total_amount': 1474.5...    False
-7483765    TX_54fccca9  CUST_20139  ...  {'num_transactions': 0, 'total_amount': 40668....    False
+        transaction_id customer_id       card_number                  timestamp vendor_category  ... is_outside_home_country is_high_risk_vendor  is_weekend                                 last_hour_activity is_fraud
+7483761    TX_58a762fa  CUST_11344   377055034743699 2024-10-30 23:59:58.926575          Retail  ...                   False               False       False  {'num_transactions': 1, 'total_amount': 1521.7...    False
+7483762    TX_dabcf671  CUST_38961   373625915641065 2024-10-30 23:59:58.950801         Grocery  ...                   False               False       False  {'num_transactions': 0, 'total_amount': 356.06...    False
+7483763    TX_ab567eb4  CUST_75576  6702342842796660 2024-10-30 23:59:58.972155         Grocery  ...                   False               False       False  {'num_transactions': 0, 'total_amount': 391.96...    False
+7483764    TX_5ae61846  CUST_82508   374615717295581 2024-10-30 23:59:58.996608          Retail  ...                   False               False       False  {'num_transactions': 2, 'total_amount': 1474.5...    False
+7483765    TX_54fccca9  CUST_20139   373017396639208 2024-10-30 23:59:59.101885         Grocery  ...                   False               False       False  {'num_transactions': 0, 'total_amount': 40668....    False
 
 [5 rows x 23 columns]
 
@@ -63,14 +63,12 @@ dtype: object
 используя исторические курсы валют на дату транзакции.
 
 Первые 5 строк курсов валют:
-         date       AUD       BRL       CAD       EUR  ...        MXN          NGN        RUB       SGD  USD
-0  2024-09-30  1.443654  5.434649  1.351196  0.895591  ...  19.694724  1668.736400  94.133735  1.280156    1
-1  2024-10-01  1.442917  5.444170  1.352168  0.897557  ...  19.667561  1670.694524  92.898519  1.284352    1
-2  2024-10-02  1.449505  5.425444  1.348063  0.903056  ...  19.606748  1669.653006  94.583198  1.286983    1
-3  2024-10-03  1.456279  5.442044  1.351451  0.906018  ...  19.457701  1670.097873  95.655442  1.294391    1
-4  2024-10-04  1.460930  5.477788  1.355260  0.906452  ...  19.363467  1649.763738  94.755337  1.296800    1
-
-[5 rows x 12 columns]
+         date       AUD       BRL       CAD       EUR       GBP         JPY        MXN          NGN        RUB       SGD  USD
+0  2024-09-30  1.443654  5.434649  1.351196  0.895591  0.747153  142.573268  19.694724  1668.736400  94.133735  1.280156    1
+1  2024-10-01  1.442917  5.444170  1.352168  0.897557  0.746956  143.831429  19.667561  1670.694524  92.898519  1.284352    1
+2  2024-10-02  1.449505  5.425444  1.348063  0.903056  0.752241  143.806861  19.606748  1669.653006  94.583198  1.286983    1
+3  2024-10-03  1.456279  5.442044  1.351451  0.906018  0.754584  146.916773  19.457701  1670.097873  95.655442  1.294391    1
+4  2024-10-04  1.460930  5.477788  1.355260  0.906452  0.761891  146.592323  19.363467  1649.763738  94.755337  1.296800    1
 
 АНАЛИЗ ПРОПУЩЕННЫХ ЗНАЧЕНИЙ
 ==================================================
@@ -110,13 +108,13 @@ is_fraud                                    0                0.0
 Распределение мошенничества по дням недели:
 is_fraud         False      True 
 day_of_week                      
-Friday       80.041320  19.958680
 Monday       80.022655  19.977345
-Saturday     80.053769  19.946231
-Sunday       79.997208  20.002792
-Thursday     80.030434  19.969566
 Tuesday      80.025032  19.974968
 Wednesday    80.022751  19.977249
+Thursday     80.030434  19.969566
+Friday       80.041320  19.958680
+Saturday     80.053769  19.946231
+Sunday       79.997208  20.002792
 
 Распределение мошенничества по часам:
 is_fraud      False      True 
@@ -413,12 +411,10 @@ True      1494719.0  412.670479  392.771128  0.0  108.0  296.0  611.0  3854.0
 
 TOTAL_AMOUNT:
 ------------------------------
-              count          mean           std  ...           50%           75%           max
-is_fraud                                         ...                                          
-False     5989047.0  1.985784e+07  3.560844e+07  ...  1.012947e+07  2.267859e+07  1.072915e+09
-True      1494719.0  2.015500e+07  3.585936e+07  ...  1.037572e+07  2.296117e+07  1.038709e+09
-
-[2 rows x 8 columns]
+              count          mean           std        min           25%           50%           75%           max
+is_fraud                                                                                                          
+False     5989047.0  1.985784e+07  3.560844e+07  22.205646  3.323374e+06  1.012947e+07  2.267859e+07  1.072915e+09
+True      1494719.0  2.015500e+07  3.585936e+07   0.014542  3.544052e+06  1.037572e+07  2.296117e+07  1.038709e+09
 
 
 UNIQUE_MERCHANTS:
@@ -439,30 +435,28 @@ True      1494719.0  10.710001  2.545636  0.0  11.0  12.0  12.0  12.0
 
 MAX_SINGLE_AMOUNT:
 ------------------------------
-              count          mean           std  ...           50%           75%           max
-is_fraud                                         ...                                          
-False     5989047.0  1.719987e+06  1.399345e+06  ...  1.229527e+06  2.287102e+06  6.253153e+06
-True      1494719.0  1.752255e+06  1.393929e+06  ...  1.267038e+06  2.333986e+06  6.253153e+06
-
-[2 rows x 8 columns]
+              count          mean           std        min            25%           50%           75%           max
+is_fraud                                                                                                           
+False     5989047.0  1.719987e+06  1.399345e+06  21.782470  796760.541495  1.229527e+06  2.287102e+06  6.253153e+06
+True      1494719.0  1.752255e+06  1.393929e+06   0.014542  822698.831406  1.267038e+06  2.333986e+06  6.253153e+06
 
 АНАЛИЗ КОРРЕЛЯЦИЙ
 ==================================================
 Корреляционная матрица:
-                              card_number    amount  ...  is_weekend      is_fraud
-card_number                  1.000000e+00 -0.003743  ...    0.000334 -8.502612e-07
-amount                      -3.742728e-03  1.000000  ...    0.000068  2.276748e-01
-hour                        -5.379684e-05 -0.063398  ...   -0.000402 -2.796239e-01
-last_hour_num_transactions   4.958537e-03  0.004461  ...   -0.039360  4.505997e-03
-last_hour_total_amount       1.148142e-03 -0.003515  ...   -0.020814  3.331642e-03
-last_hour_unique_merchants   2.050812e-03  0.005222  ...    0.019169  6.932437e-03
-last_hour_unique_countries   2.198329e-03  0.006454  ...    0.046185  9.046147e-03
-last_hour_max_single_amount -2.166281e-03  0.056458  ...   -0.005921  9.225981e-03
-is_card_present              3.138063e-04  0.140454  ...   -0.000160  6.178862e-01
-is_outside_home_country     -1.949185e-03  0.147149  ...    0.000015  6.344586e-01
-is_high_risk_vendor          5.007948e-04  0.121204  ...    0.000116  3.729181e-04
-is_weekend                   3.343667e-04  0.000068  ...    1.000000  2.590952e-05
-is_fraud                    -8.502612e-07  0.227675  ...    0.000026  1.000000e+00
+                              card_number    amount      hour  last_hour_num_transactions  last_hour_total_amount  ...  is_card_present  is_outside_home_country  is_high_risk_vendor  is_weekend      is_fraud
+card_number                  1.000000e+00 -0.003743 -0.000054                    0.004959                0.001148  ...         0.000314                -0.001949             0.000501    0.000334 -8.502612e-07
+amount                      -3.742728e-03  1.000000 -0.063398                    0.004461               -0.003515  ...         0.140454                 0.147149             0.121204    0.000068  2.276748e-01
+hour                        -5.379684e-05 -0.063398  1.000000                   -0.018660               -0.009162  ...        -0.172908                -0.177146            -0.000231   -0.000402 -2.796239e-01
+last_hour_num_transactions   4.958537e-03  0.004461 -0.018660                    1.000000                0.549460  ...         0.002802                 0.002591            -0.000238   -0.039360  4.505997e-03
+last_hour_total_amount       1.148142e-03 -0.003515 -0.009162                    0.549460                1.000000  ...         0.002256                -0.007381             0.000552   -0.020814  3.331642e-03
+last_hour_unique_merchants   2.050812e-03  0.005222 -0.027831                    0.676488                0.362317  ...         0.004242                 0.003916             0.000001    0.019169  6.932437e-03
+last_hour_unique_countries   2.198329e-03  0.006454 -0.035070                    0.478796                0.254060  ...         0.005659                 0.019101            -0.000040    0.046185  9.046147e-03
+last_hour_max_single_amount -2.166281e-03  0.056458 -0.014159                    0.523066                0.391153  ...         0.005127                 0.005919             0.002876   -0.005921  9.225981e-03
+is_card_present              3.138063e-04  0.140454 -0.172908                    0.002802                0.002256  ...         1.000000                 0.391815             0.000335   -0.000160  6.178862e-01
+is_outside_home_country     -1.949185e-03  0.147149 -0.177146                    0.002591               -0.007381  ...         0.391815                 1.000000             0.000749    0.000015  6.344586e-01
+is_high_risk_vendor          5.007948e-04  0.121204 -0.000231                   -0.000238                0.000552  ...         0.000335                 0.000749             1.000000    0.000116  3.729181e-04
+is_weekend                   3.343667e-04  0.000068 -0.000402                   -0.039360               -0.020814  ...        -0.000160                 0.000015             0.000116    1.000000  2.590952e-05
+is_fraud                    -8.502612e-07  0.227675 -0.279624                    0.004506                0.003332  ...         0.617886                 0.634459             0.000373    0.000026  1.000000e+00
 
 [13 rows x 13 columns]
 

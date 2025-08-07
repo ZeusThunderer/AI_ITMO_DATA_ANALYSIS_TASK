@@ -22,9 +22,6 @@ sns.set_palette("husl")
 # Создание директории для графиков
 os.makedirs('plots', exist_ok=True)
 
-# Настройка для корректного отображения русских символов
-plt.rcParams['font.family'] = ['DejaVu Sans', 'Arial Unicode MS', 'SimHei']
-
 def convert_to_usd(transactions_df, currency_df):
     """
     Конвертирует все суммы транзакций в доллары США
@@ -97,7 +94,7 @@ def basic_info(df, currency_df, output_file):
         f.write("ДАТАСЕТ ТРАНЗАКЦИЙ:\n")
         f.write("-" * 40 + "\n")
         f.write(f"Размер датасета: {df.shape[0]} строк, {df.shape[1]} столбцов\n")
-        f.write(f"Память, занимаемая датасетом: {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB\n\n")
+        f.write(f"Память, занимаемая датасетом в ОЗУ: {df.memory_usage(deep=True).sum() / 1024**2:.2f} MB\n\n")
         
         f.write("Типы данных:\n")
         f.write(str(df.dtypes) + "\n\n")
@@ -193,8 +190,12 @@ def temporal_analysis(df, output_file):
         df['hour'] = df['timestamp'].dt.hour
         df['day_of_week'] = df['timestamp'].dt.day_name()
         
+        # Порядок дней недели
+        week_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        df['day_of_week'] = pd.Categorical(df['day_of_week'], categories=week_order, ordered=True)
+        
         # Анализ по дням недели
-        day_fraud = df.groupby(['day_of_week', 'is_fraud']).size().unstack(fill_value=0)
+        day_fraud = df.groupby(['day_of_week', 'is_fraud']).size().unstack(fill_value=0).reindex(week_order)
         day_fraud_pct = day_fraud.div(day_fraud.sum(axis=1), axis=0) * 100
         
         f.write("Распределение мошенничества по дням недели:\n")
